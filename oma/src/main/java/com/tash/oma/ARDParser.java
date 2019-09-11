@@ -2,7 +2,6 @@ package com.tash.oma;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import org.jsoup.nodes.Document;
