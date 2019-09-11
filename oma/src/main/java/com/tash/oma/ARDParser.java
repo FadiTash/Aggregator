@@ -31,9 +31,9 @@ public class ARDParser extends ChannelParser {
 	protected String analyze(Document doc, String date) {
 		final Elements entries = doc.select(".accordion-item .row");
 		final StringBuilder result = new StringBuilder();
-		result.append("<table>");
+		result.append("<table class='ard'>");
 		result.append(addRow("Time", "Title"));
-		final ArrayList<String> items = new ArrayList<>();
+		final HashSet<String> items = new HashSet<>();
         for (Element entry : entries) {
              Elements dates = entry.select(".date");
              Elements titles = entry.select(".title");
@@ -42,8 +42,10 @@ public class ARDParser extends ChannelParser {
              }
              items.add(addRow(dates.get(0).ownText(),titles.get(0).ownText()));
         }
-        Collections.sort(items);
-        result.append(String.join("", items));
+        
+        ArrayList<String> out = new ArrayList<>(items);
+        Collections.sort(out);
+        result.append(String.join("", out));
         result.append("</table>");
         return result.toString();
 	}

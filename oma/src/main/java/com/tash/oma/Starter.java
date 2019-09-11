@@ -7,10 +7,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
+// <tr><td class='t1'>0[0-8]:\d\d</td>.*?</tr>
+//<tr><td class='t1'>23:\d\d - \d\d:\d\d</td>.*?</tr>
 public class Starter {
 
 	private static ArrayList<ChannelParser> channels = new ArrayList<ChannelParser>();
+	private static int start_date = 1;
 
 	public static void main(String[] args) throws IOException {
 		if (args.length < 2) {
@@ -32,14 +34,15 @@ public class Starter {
 
 		String result = go(month);
 		System.out.println("Writing..");
-		try (FileWriter fileWriter = new FileWriter("D:/dev/out0.html")) {
-			fileWriter.write("<!DOCTYPE html><html><head></head><body>" + result + "</body></html>");	    
+		final String css = "body {font-weight: bold;}";
+		try (FileWriter fileWriter = new FileWriter("D:/dev/out10.html")) {
+			fileWriter.write("<!DOCTYPE html><html><head><style>" + css + "</style></head><body>" + result + "</body></html>");	    
 		}
 		System.out.println("Done :)");
 	}
 
 	public static String go(int month) {
-		LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, 1);
+		LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, start_date);
 		final StringBuilder result = new StringBuilder();
 		while (date != null) {
 			final String day = date.format(DateTimeFormatter.ofPattern("dd.MM.YYYY"));
