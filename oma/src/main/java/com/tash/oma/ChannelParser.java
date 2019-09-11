@@ -64,8 +64,9 @@ public abstract class ChannelParser {
 	protected String addRow(String ...tds) {
 		StringBuilder result = new StringBuilder();
 		result.append("<tr>");
+		int i = 1;
 		for (String td: tds) {
-			result.append("<td>").append(td).append("</td>");
+			result.append("<td class='t" + i + "'>").append(td).append("</td>");
 		}
 		result.append("</tr>");
 		return result.toString();

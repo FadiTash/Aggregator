@@ -32,7 +32,7 @@ public class Starter {
 
 		String result = go(month);
 		System.out.println("Writing..");
-		try (FileWriter fileWriter = new FileWriter("C:/dev/out.html")) {
+		try (FileWriter fileWriter = new FileWriter("D:/dev/out0.html")) {
 			fileWriter.write("<!DOCTYPE html><html><head></head><body>" + result + "</body></html>");	    
 		}
 		System.out.println("Done :)");

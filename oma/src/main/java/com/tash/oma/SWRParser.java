@@ -1,5 +1,7 @@
 package com.tash.oma;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 import org.jsoup.nodes.Document;
@@ -29,13 +31,16 @@ public class SWRParser extends ChannelParser {
 		final StringBuilder result = new StringBuilder();
 		result.append("<table>");
 		result.append(addRow("Time", "Title", "Details"));
-		final HashSet<String> items = new HashSet<String>();
+		final ArrayList<String> items = new ArrayList<String>();
         for (Element entry : entries) {
              Elements dates = entry.select(".date");
              Elements titles = entry.select(".title");
-             Elements subTitles = entry.select(".subtitle");
-             items.add(addRow(dates.size() > 0 ? dates.get(0).ownText() : "", titles.size() > 0 ? titles.get(0).ownText() : "" , subTitles.size() > 0 ? subTitles.get(0).ownText() : "" ));
+             if(dates.size() <= 0 || titles.size() <= 0) {
+            	 continue;
+             }
+             items.add(addRow( dates.get(0).ownText(), titles.get(0).ownText()));
         }
+        Collections.sort(items);
         result.append(String.join("", items));
         result.append("</table>");
         return result.toString();
