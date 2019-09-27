@@ -15,7 +15,7 @@ public class Starter {
 	private static int start_date = 1;
 
 	public static void main(String[] args) throws IOException {
-		if (args.length < 2) {
+		if (args.length < 1) {
 			System.out.println("Please provide a valid month number 1-12. Example: oma 5");
 			System.exit(0);
 		}
@@ -35,7 +35,7 @@ public class Starter {
 		String result = go(month);
 		System.out.println("Writing..");
 		final String css = "body {font-weight: bold;}";
-		try (FileWriter fileWriter = new FileWriter("D:/dev/out10.html")) {
+		try (FileWriter fileWriter = new FileWriter("C:/dev/out10.html")) {
 			fileWriter.write("<!DOCTYPE html><html><head><style>" + css + "</style></head><body>" + result + "</body></html>");	    
 		}
 		System.out.println("Done :)");
